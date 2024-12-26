@@ -5,9 +5,11 @@
 #include <stdio.h>
 #include <cmath>
 
+#include "Vector.h"
 #include "Boid.h"
 #include "Renderer.h"
 #include "FlockSystem.h"
+#include "Quadtree.h"
 
 #include "config.h"
 
@@ -18,20 +20,27 @@ SDL_Texture* boidTexture = screen.loadTexture("./assets/boid.png");
 
 FlockSystem simulation;
 
+Quadtree<Boid> quadtree(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 4, 4);
+
 int SCREEN_WIDTH = 1280;
 int SCREEN_HEIGHT = 720;
 
 const double FRAME_RATE = 1000 / 60.0;
-const int BOIDS_TO_GENERATE = 250;
+const int BOIDS_TO_GENERATE = 1;
 
 int mouseX, mouseY = 0;
 
 void createBoid(int x, int y) {
     Boid boid = Boid(boidTexture, x, y, (rand() % 50 - 25) * 0.10, (rand() % 50 - 25) * 0.10, 24);
     simulation.add(boid);
+
+    Vec2 point;
+    point.x = x;
+    point.y = y;
+    // quadtree.insertPoint(point, boid);
 }
 
-int main(int argc, char** argv){
+int main(int argc, char** argv) {
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Error: SDL failed to initialize\nSDL Error: '%s'\n", SDL_GetError());

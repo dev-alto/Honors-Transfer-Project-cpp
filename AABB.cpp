@@ -1,10 +1,11 @@
+#include "Vector.h"
 #include "AABB.h"
 
-AABB::AABB(Vec2 position, int width, int height) {
-    this->lowerX = position.x;
-    this->upperX = position.x + width;
-    this->lowerY = position.y;
-    this->upperY = position.y + height;
+AABB::AABB(int x, int y, int width, int height) {
+    this->lowerX = x;
+    this->upperX = x + width;
+    this->lowerY = y;
+    this->upperY = y + height;
 
     this->width = width;
     this->height = height;

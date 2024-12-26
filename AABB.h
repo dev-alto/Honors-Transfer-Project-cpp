@@ -1,8 +1,11 @@
-#include <Vector.h>
+#pragma once
+
+#include "Vector.h"
 
 class AABB {
     public: 
-        AABB(Vec2 position, int width, int height);
+        AABB() = default;
+        AABB(int x, int y, int width, int height);
         int getLowerX() {
             return lowerX;
         }
